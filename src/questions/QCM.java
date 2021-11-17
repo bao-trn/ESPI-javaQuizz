@@ -1,12 +1,11 @@
-package Questions;
+package questions;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class QCM extends Question{
+public class QCM<T> extends Question<T>{
     ArrayList<String> choices = new ArrayList<>();
 
-    public QCM (String theme, int difficulty, String answer){
+    public QCM (String theme, int difficulty, T answer){
         super(theme, difficulty, answer);
         this.theme = theme;
         this.difficulty = difficulty;
@@ -15,13 +14,15 @@ public class QCM extends Question{
 
     }
 
-    public void addQCMchoices(String choice1, String choice2, String choice3){
+    @Override
+    public void setQuestion(String choice1, String choice2, String choice3){
         choices.add(choice1);
         choices.add(choice2);
         choices.add(choice3);
     }
 
 
+    @Override
     public void displayQuestion() {
         for (int i = 0; i < choices.size(); i++){
             System.out.println((i+1) + ": " + choices.get(i));

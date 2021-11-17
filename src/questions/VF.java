@@ -1,18 +1,13 @@
-package Questions;
+package questions;
 
-public class VF extends Question{
+public class VF<T> extends Question<T>{
 
-    public VF(String theme, int difficulty,Object answer) {
+    public VF(String theme, int difficulty,T answer) {
         super(theme, difficulty, answer);
         this.theme = theme;
         this.difficulty = difficulty;
         this.questionBody = "Please select the correct answer (V/F):";
         this.answer = answer;
     }
-
-    public void setQuestion(String question){
-        super.question = question;
-    }
-
 
 }

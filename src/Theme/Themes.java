@@ -1,6 +1,6 @@
 package Theme;
 
-import Questions.Question;
+import questions.Question;
 
 import java.util.*;
 

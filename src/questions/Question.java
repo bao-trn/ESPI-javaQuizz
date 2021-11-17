@@ -1,4 +1,4 @@
-package Questions;
+package questions;
 
 public class Question<T>{
     String theme;
@@ -38,6 +38,11 @@ public class Question<T>{
         System.out.println("THEME : " + theme);
     }
 
+    public void setQuestion(String question){
+        this.question = question;
+    }
 
-
+    public void setQuestion(String a, String b, String c) {
+        //empty because overridden in QCM.java
+    }
 }

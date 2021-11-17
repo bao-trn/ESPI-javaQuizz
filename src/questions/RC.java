@@ -1,17 +1,13 @@
-package Questions;
+package questions;
 
-public class RC extends Question{
+public class RC<T> extends Question<T>{
 
-    public RC(String theme, int difficulty, Object answer) {
+    public RC(String theme, int difficulty, T answer) {
         super(theme, difficulty ,answer);
         this.theme = theme;
         this.difficulty = difficulty;
         this.questionBody = "Please write a short answer:";
         this.answer = answer;
-    }
-
-    public void setQuestion(String question){
-        super.question = question;
     }
 
 }
