@@ -1,4 +1,4 @@
-package questions;
+package quizz.questions;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,7 @@ public class QCM<T> extends Question<T>{
     public QCM (String theme, int difficulty, T answer){
         super(theme, difficulty, answer);
         this.theme = theme;
+        this.questionType = "QCM";
         this.difficulty = difficulty;
         this.questionBody = "Please select the correct answer (1-3):";
         this.answer = answer;

@@ -1,8 +1,9 @@
-package questions;
+package quizz.questions;
 
 public class Question<T>{
     String theme;
-    String question;
+    String questionChoice;
+    String questionType;
     int difficulty;
     String questionBody;
     T answer;
@@ -13,25 +14,25 @@ public class Question<T>{
     public void displayDifficulty(){
         switch(difficulty){
             case 1:
-                System.out.println("Difficulty : EASY");
+                System.out.println("Difficulty : 1 EASY");
                 break;
             case 2:
-                System.out.println("Difficulty: MEDIUM");
+                System.out.println("Difficulty: 2 MEDIUM");
                 break;
             case 3:
-                System.out.println("Difficulty : HARD");
+                System.out.println("Difficulty : 3 HARD");
                 break;
             default:
-                System.out.println("Please input a number between 1  and 3");
+                System.out.println("Difficulty goes from 1 to 3 only");
         }
     }
 
     public void displayAnswer(){
-        System.out.println("Correct Answer: " + answer);
+        System.out.println("CORRECT ANSWER: " + answer);
     }
 
     public void displayQuestion(){
-        System.out.println("QUESTION : " + question);
+        System.out.println("QUESTION : " + questionChoice);
     }
 
     public void displayTheme(){
@@ -39,10 +40,12 @@ public class Question<T>{
     }
 
     public void setQuestion(String question){
-        this.question = question;
+        this.questionChoice = question;
     }
 
     public void setQuestion(String a, String b, String c) {
         //empty because overridden in QCM.java
     }
+
+
 }
