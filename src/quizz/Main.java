@@ -36,7 +36,8 @@ public class Main {
         theme.addQuestion(themeConstants.SPORT.name(),testQCM);
         theme.addQuestion(themeConstants.SPORT.name(),testRC);
         theme.addQuestion(themeConstants.SPORT.name(),testVF);
-        System.out.println(theme.getThemes());
+        theme.displayThemesAndIndex();
+        System.out.println(theme.selectFiveRandomThemes());
 
 
     }

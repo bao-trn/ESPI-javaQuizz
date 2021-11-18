@@ -47,5 +47,8 @@ public class Question<T>{
         //empty because overridden in QCM.java
     }
 
+    public String toString(){
+        return questionType;
+    }
 
 }
