@@ -1,5 +1,6 @@
 package quizz.theme;
 
+import quizz.constants.themeConstants;
 import quizz.questions.Question;
 
 import java.lang.reflect.Array;
@@ -16,6 +17,11 @@ public class Themes<T> {
         themesSize++;
     }
 
+    /**
+     * Adds to the theme a question that has to be initialized before
+     * @param theme
+     * @param question
+     */
     public void addQuestion(String theme, Question<T> question){
         themeMap.get(theme).add(question);
     }
@@ -24,25 +30,31 @@ public class Themes<T> {
         return themeMap;
     }
 
+    /**
+     * displays index and the theme associated with it
+     */
     public void displayThemesAndIndex(){
         for (int i = 0; i < themesSize; i++){
             System.out.println("Index : " + i + " " + indexMap.get(i));
         }
     }
 
-    public ArrayList<Integer> selectFiveRandomThemes(){
+
+    /**
+     * @return array of 5 UNIQUE String in themeConstants
+     */
+    public ArrayList<String> selectFiveRandomThemes(){
         ArrayList<Integer> randomIndexArray= new ArrayList<Integer>();
+        ArrayList<String> indexToTheme = new ArrayList<String>();
         Random random = new Random();
-        for (int i = 0; i < themesSize; i++){
-            if (i == 5){
-                break;
-            }
-            int myRandom = random.nextInt(themesSize);
+        while(randomIndexArray.size() < 5) {
+            int myRandom = random.nextInt(10);
             if (!randomIndexArray.contains(myRandom)){
                 randomIndexArray.add(myRandom);
+                indexToTheme.add(themeConstants.values()[myRandom].toString());
             }
         }
-        return randomIndexArray;
+        return indexToTheme;
     }
 
 

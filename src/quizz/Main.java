@@ -7,6 +7,8 @@ import quizz.questions.RC;
 import quizz.questions.VF;
 import quizz.constants.themeConstants;
 
+import java.io.ObjectStreamException;
+
 public class Main {
 
     public static void main(String[] args){
@@ -20,6 +22,10 @@ public class Main {
         testVF.setQuestion("Am I bald?");
         testRC.setQuestion("Describe yourself in 10 words");
 
+        testQCM.displayQuestion();
+        testQCM.displayAnswer();
+        testQCM.displayTheme();
+        testQCM.displayDifficulty();
 
         Themes<Object> theme = new Themes<>();
         theme.addTheme(themeConstants.SPORT.name());
@@ -38,6 +44,12 @@ public class Main {
         theme.addQuestion(themeConstants.SPORT.name(),testVF);
         theme.displayThemesAndIndex();
         System.out.println(theme.selectFiveRandomThemes());
+        System.out.println(theme.getThemes().get(themeConstants.SPORT.name()));
+
+        Question<Object> newQCM = new QCM<>(themeConstants.GAMES.name(), 3, 2);
+        theme.addQuestion(themeConstants.GAMES.name(),newQCM);
+        theme.getThemes().get(themeConstants.GAMES.name()).get(0).setQuestion("new1", "new2","new3");
+        theme.getThemes().get(themeConstants.GAMES.name()).get(0).displayQuestion();
 
 
     }
