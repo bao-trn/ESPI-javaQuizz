@@ -48,8 +48,12 @@ public class Main {
 
         Question<Object> newQCM = new QCM<>(themeConstants.GAMES.name(), 3, 2);
         theme.addQuestion(themeConstants.GAMES.name(),newQCM);
-        theme.getThemes().get(themeConstants.GAMES.name()).get(0).setQuestion("new1", "new2","new3");
-        theme.getThemes().get(themeConstants.GAMES.name()).get(0).displayQuestion();
+        theme.addQuestion(themeConstants.GAMES.name(),testQCM);
+        System.out.println(theme.getThemes().get(themeConstants.GAMES.name()).size());
+        theme.deleteQuestion(themeConstants.GAMES.name(),0);
+        System.out.println(theme.getThemes().get(themeConstants.GAMES.name()).size());
+
+
 
 
     }

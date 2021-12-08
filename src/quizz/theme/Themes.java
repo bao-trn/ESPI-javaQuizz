@@ -17,6 +17,10 @@ public class Themes<T> {
         themesSize++;
     }
 
+    public void deleteQuestion(String theme, int index) {
+        themeMap.get(theme).remove(index);
+    }
+
     /**
      * Adds to the theme a question that has to be initialized before
      * @param theme
