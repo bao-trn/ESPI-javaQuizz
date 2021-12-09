@@ -9,6 +9,7 @@ public class RC<T> extends Question<T>{
         this.difficulty = difficulty;
         this.questionBody = "Please write a short answer:";
         this.answer = answer;
+        this.questionChoice = "Placeholder question";
     }
 
 }

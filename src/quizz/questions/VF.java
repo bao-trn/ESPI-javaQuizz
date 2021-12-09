@@ -9,6 +9,7 @@ public class VF<T> extends Question<T>{
         this.difficulty = difficulty;
         this.questionBody = "Please select the correct answer (V/F):";
         this.answer = answer;
+        this.questionChoice = "Placeholder question";
     }
 
 }

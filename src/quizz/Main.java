@@ -1,6 +1,5 @@
 package quizz;
 
-import quizz.interfaces.Phase;
 import quizz.joueurs.Player;
 import quizz.joueurs.Players;
 import quizz.theme.Themes;
@@ -13,7 +12,7 @@ import quizz.constants.themeConstants;
 public class Main {
 
     public static void main(String[] args){
-        Question<Object> testQCM = new QCM<>(themeConstants.SPORT.name(),2,"1");
+        /*Question<Object> testQCM = new QCM<>(themeConstants.SPORT.name(),2,"1");
         Question<Object> testVF = new VF<>(themeConstants.ART.name(),1,true);
         Question<Object> testRC = new RC<>(themeConstants.ANIME.name(),3,"This is a short text");
 
@@ -50,31 +49,13 @@ public class Main {
         theme.addQuestion(themeConstants.GAMES.name(),testQCM);
         System.out.println(theme.getThemes().get(themeConstants.GAMES.name()).size());
         theme.deleteQuestion(themeConstants.GAMES.name(),0);
-        System.out.println(theme.getThemes().get(themeConstants.GAMES.name()).size());
+        System.out.println(theme.getThemes().get(themeConstants.GAMES.name()).size());*/
 
+        //game.themes.getThemes().forEach((x,y) -> System.out.println(y));
+       // game.themes.getThemes().forEach((x, y) -> y.forEach(w -> w.displayAnswer()));
 
-        Player playerOne = new Player();
-        Player playerTwo = new Player();
-        Player playerThree = new Player();
-        Player playerFour = new Player();
-        Player playerFive = new Player();
-        Player playerSix = new Player();
-
-        playerOne.setId(69);
-        playerTwo.setId(787);
-        playerThree.setId(420);
-        playerFour.setId(999);
-        playerFive.setId(666);
-        playerSix.setId(1);
-        Players participants = new Players();
-        participants.addPlayer(playerOne);
-        participants.addPlayer(playerTwo);
-        participants.addPlayer(playerThree);
-        participants.addPlayer(playerFour);
-        participants.addPlayer(playerFive);
-        participants.addPlayer(playerSix);
-        System.out.println(participants.selectPlayers());
-        System.out.println(participants.selectRandomPlayer());
+        Game game = new Game();
+        System.out.println(game.start().size());
 
 
     }

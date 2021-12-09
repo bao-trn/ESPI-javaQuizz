@@ -1,5 +1,6 @@
 package quizz.theme;
 
+import quizz.Utils.RandomUtils;
 import quizz.constants.themeConstants;
 import quizz.questions.Question;
 
@@ -42,24 +43,5 @@ public class Themes<T> {
             System.out.println("Index : " + i + " " + indexMap.get(i));
         }
     }
-
-
-    /**
-     * @return array of 5 UNIQUE String in themeConstants
-     */
-    public ArrayList<String> selectFiveRandomThemes(){
-        ArrayList<Integer> randomIndexArray= new ArrayList<Integer>();
-        ArrayList<String> indexToTheme = new ArrayList<String>();
-        Random random = new Random();
-        while(randomIndexArray.size() < 5) {
-            int myRandom = random.nextInt(10);
-            if (!randomIndexArray.contains(myRandom)){
-                randomIndexArray.add(myRandom);
-                indexToTheme.add(themeConstants.values()[myRandom].toString());
-            }
-        }
-        return indexToTheme;
-    }
-
 
 }

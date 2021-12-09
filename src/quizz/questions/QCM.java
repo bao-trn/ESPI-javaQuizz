@@ -25,6 +25,7 @@ public class QCM<T> extends Question<T>{
 
     @Override
     public void displayQuestion() {
+        System.out.println(questionBody);
         for (int i = 0; i < choices.size(); i++){
             System.out.println((i+1) + ": " + choices.get(i));
         }

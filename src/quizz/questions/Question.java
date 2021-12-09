@@ -47,6 +47,54 @@ public class Question<T>{
         //empty because overridden in QCM.java
     }
 
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public String getQuestionChoice() {
+        return questionChoice;
+    }
+
+    public void setQuestionChoice(String questionChoice) {
+        this.questionChoice = questionChoice;
+    }
+
+    public String getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getQuestionBody() {
+        return questionBody;
+    }
+
+    public void setQuestionBody(String questionBody) {
+        this.questionBody = questionBody;
+    }
+
+    public T getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(T answer) {
+        this.answer = answer;
+    }
+
     public String toString(){
         return questionType;
     }
