@@ -14,8 +14,7 @@ public class Player {
 
     public String userInput(){
         Scanner myObj = new Scanner(System.in);
-        String answer = myObj.nextLine();
-        return answer;
+        return myObj.nextLine();
     }
 
     @Override

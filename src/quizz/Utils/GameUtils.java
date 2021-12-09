@@ -28,8 +28,9 @@ public class GameUtils {
         }
     }
 
-    public static void initQuestions(Themes<Object> themes){
-        for (int i = 0; i < 10; i++){
+    //todo fucking questions from another theme are getting added;
+    public static void initQuestions(Themes<Object> themes, int bound){
+        for (int i = 0; i < bound; i++){
             for (int j = 0; j < 2; j++) {
                 themes.addQuestion(themeConstants.values()[i].name(), new QCM<>(themeConstants.values()[i].name(),1, "1"));
                 themes.addQuestion(themeConstants.values()[i].name(), new VF<>(themeConstants.values()[i].name(),1, "1"));
@@ -45,6 +46,15 @@ public class GameUtils {
         }
     }
 
+    public static List<Question<Object>> fetchQuestionsOfDifficulty(List<Question<Object>> source, List<Question<Object>> output, int difficulty){
+        for (Question<Object> question : source){
+            if (question.getDifficulty() == difficulty){
+                output.add(question);
+            }
+        }
+        return output;
+    }
+
     public static void initTruncatedThemes(Themes<Object> themes, Themes<Object> truncatedThemes, int bound){
         while (truncatedThemes.getThemes().size() < bound) {
             String randomTheme = themeConstants.values()[RandomUtils.selectRandom(themes.getThemes().size())].name();
@@ -54,56 +64,29 @@ public class GameUtils {
         }
     }
 
-    public static void playerAction(Players players, List<Question<Object>> diffQuestions, int questionsPerPlayer){
-        for (int i = 0; i < players.getSelectedPlayers().size(); i++){
-            Player currentPlayer = players.getSelectedPlayers().get(i);
-            Question<Object> randomQuestion = diffQuestions.get(RandomUtils.selectRandom(diffQuestions.size()));
+    public static void playerAction(Player player, List<Question<Object>> diffQuestions) {
 
-            for (int j = 0; j < questionsPerPlayer; j++){
-                String questionForPlayer = randomQuestion.getQuestionBody() + System.lineSeparator() +randomQuestion.getQuestionChoice();
+        Question<Object> randomQuestion = diffQuestions.get(RandomUtils.selectRandom(diffQuestions.size()));
 
-                //display question and compute player's answer
-                System.out.println(questionForPlayer);
-                System.out.println("Player [" + currentPlayer.getId() + "] ANSWER :");
-                if (randomQuestion.getAnswer().equals(currentPlayer.userInput())){
-                    currentPlayer.setScore(currentPlayer.getScore()+2);
-                    System.out.println("Correct Answer! +2 points awarded, your current score is : " + currentPlayer.getScore());
+        String questionForPlayer = randomQuestion.getQuestionBody() + System.lineSeparator() + randomQuestion.getQuestionChoice();
 
-                }else{
-                    System.out.println("Wrong answer! Correct answer was " + randomQuestion.getAnswer() + " your current score is : " + currentPlayer.getScore());
-                }
-                //ensures a new question is selected
-                Question<Object> newRandomQuestion = diffQuestions.get(RandomUtils.selectRandom(diffQuestions.size()));
-                if (!newRandomQuestion.equals(randomQuestion)){
-                    randomQuestion = newRandomQuestion;
-                }
-            }
+        //display question and compute player's answer
+        System.out.println(questionForPlayer);
+        System.out.println("Player [" + player.getId() + "] ANSWER :");
+        if (randomQuestion.getAnswer().equals(player.userInput())) {
+            player.setScore(player.getScore() + 2);
+            System.out.println("Correct Answer! +2 points awarded, your current score is : " + player.getScore());
 
+        } else {
+            System.out.println("Wrong answer! Correct answer was " + randomQuestion.getAnswer() + " your current score is : " + player.getScore());
         }
+        //ensures a new question is selected
+        Question<Object> newRandomQuestion = diffQuestions.get(RandomUtils.selectRandom(diffQuestions.size()));
+        if (!newRandomQuestion.equals(randomQuestion)) {
+            randomQuestion = newRandomQuestion;
+        }
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static int getMaxScore(Players players){
         int max = 0;
@@ -149,5 +132,4 @@ public class GameUtils {
     public static void resetQuestionList(LinkedList<Question<Object>> list){
         list.forEach(x -> list.remove(x));
     }
-
 }

@@ -1,5 +1,6 @@
 package quizz.interfaces;
 
+import quizz.Game;
 import quizz.Utils.GameUtils;
 import quizz.Utils.RandomUtils;
 import quizz.constants.themeConstants;
@@ -21,7 +22,13 @@ public interface Phase {
         System.out.println("Players will answer an EASY question for each of the 10 different THEMES.");
     }
 
-    default void phaseStart(Themes<Object> themes, Players players, int numberOfThemes, int questionsPerPlayer, int difficulty){
+    default void phaseTwoRules(){
+        System.out.println("Welcome to the second phase of this game!");
+        System.out.println("There are 3 remaining players.");
+        System.out.println("Players will pick TWO THEMES and answer a MEDIUM question for each of them.");
+    }
+
+    default void phaseStart(Themes<Object> themes, Players players, int numberOfThemes, int difficulty){
         int themeWheel = RandomUtils.selectRandom(numberOfThemes);
         int themeCounter = 0;
         for (int i = 0; i < numberOfThemes; i++){
@@ -35,13 +42,18 @@ public interface Phase {
                 break;
             }
 
-            for (Question<Object> question : questionList) {
-                if (question.getDifficulty() == difficulty) {
-                    diffQuestions.add(question);
+            for (int j = 0; j < players.getSelectedPlayers().size(); j++) {
+                Player currentPlayer = players.getSelectedPlayers().get(j);
+                if (difficulty == 2){
+                    System.out.println("REMAINING THEMES ARE : ");
+                    System.out.println(themes.getThemes().keySet());
+                    currentTheme = currentPlayer.userInput();
+                    GameUtils.resetQuestionList(questionList);
+                    themes.getThemes().remove(currentTheme);
                 }
+                GameUtils.playerAction(currentPlayer, GameUtils.fetchQuestionsOfDifficulty(questionList, diffQuestions, difficulty));
             }
 
-            GameUtils.playerAction(players, diffQuestions, questionsPerPlayer);
 
             System.out.println(diffQuestions);
             System.out.println("END OF QUESTIONS FOR THEME : " + currentTheme);
