@@ -9,6 +9,9 @@ public class Question<T>{
     T answer;
 
     public Question(String theme, int difficulty, T answer) {
+        this.theme = theme;
+        this.difficulty = difficulty;
+        this.answer = answer;
     }
 
     public void displayDifficulty(){

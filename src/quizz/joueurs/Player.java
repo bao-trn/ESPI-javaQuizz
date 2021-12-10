@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 
 public class Player {
+    private String name;
     private int score;
     private int id;
     private String state;
 
-    public Player(){
+    public Player(String name){
+        this.name = name;
         this.state = "waiting";
     }
 
@@ -17,10 +19,8 @@ public class Player {
         return myObj.nextLine();
     }
 
-    @Override
-    public String toString(){
-        return "[id: " + id +" | Score: " + score + "]";
-    }
+
+    public String getName() { return name; }
 
     public int getId(){
         return id;
@@ -38,11 +38,14 @@ public class Player {
         this.score = score;
     }
 
-    public String getState() {
-        return state;
-    }
+    public String getState() { return state; }
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString(){
+        return "[Name: "+ name + " | Id: " + id + " | Score: " + score + "]";
     }
 }

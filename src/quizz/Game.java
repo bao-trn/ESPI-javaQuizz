@@ -18,14 +18,16 @@ public class Game implements Phase {
     Themes<Object> themes = new Themes<>();
     Themes<Object> truncatedThemes = new Themes<>();
     private int phase = 1;
-    Player winner = null;
+    boolean winner = false;
 
     public void start(){
-        while(winner == null){
+        while(winner == false){
             switch (phase){
                 case 1:
                     GameUtils.initAll(themes, truncatedThemes, players);
                     phaseOneRules();
+                    players.displayPlayers(players.getPlayerList());
+                    players.resetState();
                     phaseStart(truncatedThemes, players, 3, phase);
                     truncatedThemes = new Themes<>();
                     endPhase(players, themes, truncatedThemes, 6, false);
@@ -33,6 +35,7 @@ public class Game implements Phase {
                     break;
                 case 2:
                     phaseTwoRules();
+                    players.displayPlayers(players.getSelectedPlayers());
                     phaseStart(truncatedThemes, players, 6, phase);
                     truncatedThemes = new Themes<>();
                     endPhase(players, themes, truncatedThemes, 3, true);
@@ -40,10 +43,13 @@ public class Game implements Phase {
                     break;
                 case 3:
                     phaseThreeRules();
+                    players.displayPlayers(players.getSelectedPlayers());
                     phaseStart(truncatedThemes, players, 3, phase);
-                    System.out.print("SUPER WINNER IS : ");
-                    System.out.println(GameUtils.getWinners(players, GameUtils.getMaxScore(players)).get(0));
-                    winner = GameUtils.getWinners(players, GameUtils.getMaxScore(players)).get(0);
+                    players.getSelectedPlayers().remove(players.getLoser());
+                    System.out.print("CONGRATULATIONS ! ");
+                    players.getSelectedPlayers().get(0).setState("SUPER WINNER");
+                    players.displayPlayers(players.getSelectedPlayers());
+                    winner = true;
                     break;
                 default:
                     break;

@@ -40,7 +40,7 @@ public class Themes<T> {
      */
     public void displayThemesAndIndex(){
         for (int i = 0; i < themesSize; i++){
-            System.out.println("Index : " + i + " " + indexMap.get(i));
+            System.out.println("Index " + i + " : " + indexMap.get(i));
         }
     }
 

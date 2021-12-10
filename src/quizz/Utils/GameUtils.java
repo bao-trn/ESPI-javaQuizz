@@ -1,5 +1,6 @@
 package quizz.Utils;
 
+import quizz.constants.nameConstants;
 import quizz.constants.themeConstants;
 import quizz.joueurs.Player;
 import quizz.joueurs.Players;
@@ -17,8 +18,8 @@ import java.util.List;
 public class GameUtils {
 
     public static void initPlayers(Players players) {
-        for (int i = 0; i < 20; i++) {
-            players.addPlayer(new Player());
+        for (nameConstants player: nameConstants.values()){
+            players.addPlayer(new Player(player.name()));
         }
     }
 
@@ -39,7 +40,6 @@ public class GameUtils {
             themes.addQuestion(themeName, new QCM<>(themeName, 3, "3"));
             themes.addQuestion(themeName, new VF<>(themeName, 3, "3"));
             themes.addQuestion(themeName, new RC<>(themeName, 3, "3"));
-
         }
     }
 
@@ -88,10 +88,10 @@ public class GameUtils {
 
         //display question and compute player's answer
         System.out.println(questionForPlayer);
-        System.out.println("Player [" + player.getId() + "] ANSWER :");
+        System.out.print("[" + player.getName() + "] ANSWER : ");
         if (randomQuestion.getAnswer().equals(player.userInput())) {
             player.setScore(player.getScore() + scoreIncrement);
-            System.out.println("Correct Answer! "+ scoreIncrement +"points awarded, your current score is : " + player.getScore());
+            System.out.println("Correct Answer! "+ scoreIncrement +" points awarded, your current score is : " + player.getScore());
 
         } else {
             System.out.println("Wrong answer! Correct answer was " + randomQuestion.getAnswer() + " your current score is : " + player.getScore());
@@ -116,40 +116,6 @@ public class GameUtils {
         }
     }
 
-    public static int getMaxScore(Players players) {
-        int max = 0;
-        List<Player> listPlayer = players.getSelectedPlayers();
-        for (int i = 0; i < listPlayer.size(); i++) {
-            if (listPlayer.get(i).getScore() >= max) {
-                max = listPlayer.get(i).getScore();
-            }
-        }
-        return max;
-    }
 
-    public static List<Player> getWinners(Players players, int maxScore) {
-        List<Player> listPlayer = players.getSelectedPlayers();
-        List<Player> listWinner = new ArrayList<>();
-        for (int i = 0; i < listPlayer.size(); i++) {
-            if (listPlayer.get(i).getScore() == maxScore) {
-                listPlayer.get(i).setState("winner");
-                listWinner.add(listPlayer.get(i));
-            }
-        }
-        return listWinner;
-    }
-
-    public static Player getLoser(Players players) {
-        int min = 999;
-        Player loser = null;
-        List<Player> listPlayer = players.getSelectedPlayers();
-        for (int i = 0; i < listPlayer.size(); i++) {
-            if (listPlayer.get(i).getScore() <= min) {
-                min = listPlayer.get(i).getScore();
-                loser = listPlayer.get(i);
-            }
-        }
-        return loser;
-    }
 }
 

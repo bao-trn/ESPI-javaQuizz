@@ -46,7 +46,7 @@ public interface Phase {
                 if (difficulty == 1){
                     System.out.println("Current THEME is : " + currentTheme);
                     GameUtils.playerAction(currentPlayer, GameUtils.fetchQuestionsOfDifficulty(questionList, diffQuestions, difficulty), difficulty);
-                    System.out.println("END OF QUESTIONS FOR THEME : " + currentTheme);
+                    System.out.println("END OF QUESTIONS FOR THEME : " + currentTheme + System.lineSeparator());
                     if (themeWheel < numberOfThemes){
                         themeWheel++;
                     }
@@ -66,12 +66,12 @@ public interface Phase {
                             System.out.println("REMAINING THEMES ARE : ");
                         }
                         System.out.println(themes.getThemes().keySet());
-                        System.out.print("Please select a THEME : ");
+                        System.out.print("["+ currentPlayer.getName() + "] Please select a THEME : ");
                         String themeSelected = GameUtils.checkUserInput(themes, currentPlayer);
                         System.out.println("Current THEME is : " + themeSelected);
                         questionList = themes.getThemes().get(themeSelected);
                         GameUtils.playerAction(currentPlayer, GameUtils.fetchQuestionsOfDifficulty(questionList, diffQuestions, difficulty), difficulty);
-                        System.out.println("END OF QUESTIONS FOR THEME : " + themeSelected);
+                        System.out.println("END OF QUESTIONS FOR THEME : " + themeSelected + System.lineSeparator());
                         themes.getThemes().remove(themeSelected);
                     }
                 }
@@ -83,9 +83,10 @@ public interface Phase {
     }
 
     default void endPhase(Players players, Themes<Object> themes, Themes<Object> truncated, int bound, boolean prepLastPhase){
-        System.out.println("Winners of PHASE : " + GameUtils.getWinners(players, GameUtils.getMaxScore(players)));
-        System.out.println("Loser of PHASE : " + GameUtils.getLoser(players) + System.lineSeparator());
-        players.getSelectedPlayers().remove(GameUtils.getLoser(players));
+        players.getWinners();
+        players.getLoser();
+        players.displayPlayers(players.getSelectedPlayers());
+        players.getSelectedPlayers().remove(players.getLoser());
         if (prepLastPhase){
             GameUtils.initSelectedThemes(truncated, "ANIME", "LOGIC", "GEOGRAPHY");
             GameUtils.initQuestions(truncated);
@@ -93,6 +94,7 @@ public interface Phase {
             GameUtils.initTruncatedThemes(themes, truncated, bound);
             GameUtils.initQuestions(truncated);
         }
+        players.resetState();
     }
 
 }
