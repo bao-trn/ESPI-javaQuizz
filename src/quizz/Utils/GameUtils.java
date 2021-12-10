@@ -69,6 +69,12 @@ public class GameUtils {
         }
     }
 
+    public static void initSelectedThemes(Themes<Object> themes, String t1, String t2, String t3){
+        themes.addTheme(t1);
+        themes.addTheme(t2);
+        themes.addTheme(t3);
+    }
+
     public static void playerAction(Player player, List<Question<Object>> diffQuestions) {
 
         Question<Object> randomQuestion = diffQuestions.get(RandomUtils.selectRandom(diffQuestions.size()));
@@ -97,7 +103,6 @@ public class GameUtils {
         while (true){
             String currentUserInput = player.userInput();
             if (themes.getThemes().containsKey(currentUserInput)){
-                themes.getThemes().remove(currentUserInput);
                 return currentUserInput;
             }else{
                 System.out.println("Wrong input, please select one of the remaining themes (Case Sensitive)");

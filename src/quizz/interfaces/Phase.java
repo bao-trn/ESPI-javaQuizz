@@ -39,7 +39,7 @@ public interface Phase {
         int themeCounter = 0;
         for (int i = 0; i < numberOfThemes; i++){
             String currentTheme = themeConstants.values()[themeWheel].name();
-            LinkedList<Question<Object>> questionList = themes.getThemes().get(currentTheme);
+            List<Question<Object>> questionList = themes.getThemes().get(currentTheme);
             List<Question<Object>> diffQuestions = new ArrayList<>();
 
             if (themeCounter == numberOfThemes){
@@ -48,17 +48,7 @@ public interface Phase {
 
             for (int j = 0; j < players.getSelectedPlayers().size(); j++){
                 Player currentPlayer = players.getSelectedPlayers().get(j);
-                if (difficulty == 2){
-                    for (int k = 0; k < 2; k++){
-                        System.out.println("REMAINING THEMES ARE : ");
-                        System.out.println(themes.getThemes().keySet());
-                        System.out.print("Please select a THEME : ");
-                        String themeSelected = GameUtils.checkUserInput(themes, currentPlayer);
-                        System.out.println("Current THEME is : " + themeSelected);
-                        GameUtils.playerAction(currentPlayer, GameUtils.fetchQuestionsOfDifficulty(questionList, diffQuestions, difficulty));
-                        System.out.println("END OF QUESTIONS FOR THEME : " + currentTheme);
-                    }
-                }else{
+                if (difficulty == 1){
                     System.out.println("Current THEME is : " + currentTheme);
                     GameUtils.playerAction(currentPlayer, GameUtils.fetchQuestionsOfDifficulty(questionList, diffQuestions, difficulty));
                     System.out.println("END OF QUESTIONS FOR THEME : " + currentTheme);
@@ -69,16 +59,35 @@ public interface Phase {
                         themeWheel = 0;
                     }
                     themeCounter++;
+                } else {
+                    int numQuestions = 2;
+                    if (difficulty == 3){
+                        numQuestions = 1;
+                    }
+                    for (int k = 0; k < numQuestions; k++){
+                        if (difficulty == 3){
+                            System.out.println("THE 3 THEMES ARE : ");
+                            k++;
+                        }else{
+                            System.out.println("REMAINING THEMES ARE : ");
+                        }
+                        System.out.println(themes.getThemes().keySet());
+                        System.out.print("Please select a THEME : ");
+                        String themeSelected = GameUtils.checkUserInput(themes, currentPlayer);
+                        System.out.println("Current THEME is : " + themeSelected);
+                        questionList = themes.getThemes().get(themeSelected);
+                        GameUtils.playerAction(currentPlayer, GameUtils.fetchQuestionsOfDifficulty(questionList, diffQuestions, difficulty));
+                        System.out.println("END OF QUESTIONS FOR THEME : " + themeSelected);
+                        themes.getThemes().remove(themeSelected);
+                    }
                 }
-            } if (difficulty == 2){
+            } if (difficulty == 2 || difficulty == 3){
                 break;
             }
-
-
         }
     }
 
-    default void endPhase(Players players, Themes<Object> themes, Themes<Object> truncated, int bound){
+    default void endPhase(Players players, Themes<Object> themes, Themes<Object> truncated, int bound, int phase){
         System.out.println("Winners of PHASE : " + GameUtils.getWinners(players, GameUtils.getMaxScore(players)));
         System.out.println("Loser of PHASE : " + GameUtils.getLoser(players) + System.lineSeparator());
         players.getSelectedPlayers().remove(GameUtils.getLoser(players));
