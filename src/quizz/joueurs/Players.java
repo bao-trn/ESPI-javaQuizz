@@ -12,21 +12,8 @@ public class Players {
     private final List<Player> selectedPlayers = new ArrayList<>(4);
     private int playerNumberIncrement = 100;
 
-
-    public List<Player> getPlayerList() {
-        return playerList;
-    }
-
     public List<Player> getSelectedPlayers() {
         return selectedPlayers;
-    }
-
-    public int getPlayerNumberIncrement() {
-        return playerNumberIncrement;
-    }
-
-    public void setPlayerNumberIncrement(int playerNumberIncrement) {
-        this.playerNumberIncrement = playerNumberIncrement;
     }
 
     public void addPlayer(Player player){
@@ -35,9 +22,6 @@ public class Players {
         playerNumberIncrement += 10;
     }
 
-    public int selectRandomPlayer(){
-        return RandomUtils.selectRandom(playerList.size());
-    }
 
     /**
      *

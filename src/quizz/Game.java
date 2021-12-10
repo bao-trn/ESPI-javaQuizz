@@ -26,23 +26,20 @@ public class Game implements Phase {
                 case 1:
                     GameUtils.initAll(themes, truncatedThemes, players);
                     phaseOneRules();
-                    phaseStart(truncatedThemes, players, 1, phase);
+                    phaseStart(truncatedThemes, players, 3, phase);
                     truncatedThemes = new Themes<>();
-                    endPhase(players, themes, truncatedThemes, 6, 1);
+                    endPhase(players, themes, truncatedThemes, 6, false);
                     phase++;
                     break;
                 case 2:
                     phaseTwoRules();
                     phaseStart(truncatedThemes, players, 6, phase);
                     truncatedThemes = new Themes<>();
-                    endPhase(players, themes, truncatedThemes, 3, 2);
+                    endPhase(players, themes, truncatedThemes, 3, true);
                     phase++;
                     break;
                 case 3:
                     phaseThreeRules();
-                    truncatedThemes = new Themes<>();
-                    GameUtils.initSelectedThemes(truncatedThemes, "ANIME", "LOGIC", "GEOGRAPHY");
-                    GameUtils.initQuestions(truncatedThemes);
                     phaseStart(truncatedThemes, players, 3, phase);
                     System.out.print("SUPER WINNER IS : ");
                     System.out.println(GameUtils.getWinners(players, GameUtils.getMaxScore(players)).get(0));
