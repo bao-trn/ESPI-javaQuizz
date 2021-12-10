@@ -28,22 +28,27 @@ public class GameUtils {
         }
     }
 
-    //todo fucking questions from another theme are getting added;
-    public static void initQuestions(Themes<Object> themes, int bound){
-        for (int i = 0; i < bound; i++){
-            for (int j = 0; j < 2; j++) {
-                themes.addQuestion(themeConstants.values()[i].name(), new QCM<>(themeConstants.values()[i].name(),1, "1"));
-                themes.addQuestion(themeConstants.values()[i].name(), new VF<>(themeConstants.values()[i].name(),1, "1"));
-                themes.addQuestion(themeConstants.values()[i].name(), new RC<>(themeConstants.values()[i].name(),1, "1"));
-                themes.addQuestion(themeConstants.values()[i].name(), new QCM<>(themeConstants.values()[i].name(),2, "2"));
-                themes.addQuestion(themeConstants.values()[i].name(), new VF<>(themeConstants.values()[i].name(),2, "2"));
-                themes.addQuestion(themeConstants.values()[i].name(), new RC<>(themeConstants.values()[i].name(),2, "2"));
-                themes.addQuestion(themeConstants.values()[i].name(), new QCM<>(themeConstants.values()[i].name(),3, "3"));
-                themes.addQuestion(themeConstants.values()[i].name(), new VF<>(themeConstants.values()[i].name(),3, "3"));
-                themes.addQuestion(themeConstants.values()[i].name(), new RC<>(themeConstants.values()[i].name(),3, "3"));
-            }
+    public static void initQuestions(Themes<Object> themes){
+        for (String themeName : themes.getThemes().keySet()){
+            themes.addQuestion(themeName, new QCM<>(themeName,1, "1"));
+            themes.addQuestion(themeName, new VF<>(themeName,1, "1"));
+            themes.addQuestion(themeName, new RC<>(themeName,1, "1"));
+            themes.addQuestion(themeName, new QCM<>(themeName,2, "2"));
+            themes.addQuestion(themeName, new VF<>(themeName,2, "2"));
+            themes.addQuestion(themeName, new RC<>(themeName,2, "2"));
+            themes.addQuestion(themeName, new QCM<>(themeName,3, "3"));
+            themes.addQuestion(themeName, new VF<>(themeName,3, "3"));
+            themes.addQuestion(themeName, new RC<>(themeName,3, "3"));
 
         }
+    }
+
+    public static void initAll(Themes<Object> themes, Themes<Object> truncated, Players players){
+        initPlayers(players);
+        initThemes(themes);
+        initTruncatedThemes(themes, truncated, themes.getThemes().size());
+        initQuestions(truncated);
+        players.selectPlayers();
     }
 
     public static List<Question<Object>> fetchQuestionsOfDifficulty(List<Question<Object>> source, List<Question<Object>> output, int difficulty){
@@ -88,7 +93,20 @@ public class GameUtils {
 
     }
 
-    public static int getMaxScore(Players players){
+    public static String checkUserInput(Themes<Object> themes, Player player) {
+        while (true){
+            String currentUserInput = player.userInput();
+            if (themes.getThemes().containsKey(currentUserInput)){
+                themes.getThemes().remove(currentUserInput);
+                return currentUserInput;
+            }else{
+                System.out.println("Wrong input, please select one of the remaining themes (Case Sensitive)");
+                System.out.print("Try again : ");
+            }
+        }
+    }
+
+    public static int getMaxScore(Players players) {
         int max = 0;
         List<Player> listPlayer = players.getSelectedPlayers();
         for (int i = 0; i < listPlayer.size(); i++){
